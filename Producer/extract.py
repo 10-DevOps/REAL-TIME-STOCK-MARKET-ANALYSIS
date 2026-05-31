@@ -22,7 +22,7 @@ def connect_to_api():
         
             data = response.json()
 
-            logger.info("Stocks successfully loaded")
+            logger.info(f"Stocks{stocks[stock]} loaded successfully")
         
             json_response.append(data)
 

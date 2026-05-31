@@ -1,0 +1,12 @@
+git config --global user.name '10-DevOps'
+git config --global user.email 'eo.akinbola@gmail.com' 
+
+git config --list
+
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/10-DevOps/REAL-TIME-STOCK-MARKET-ANALYSIS.git
+git push -u origin main
