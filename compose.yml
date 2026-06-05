@@ -6,7 +6,7 @@ volumes:
   postgres_data:
 
 networks:
-  stock_data:       # Shared network for containers communication
+  stock_data: 
 
 services:
   spark-master:
@@ -50,24 +50,24 @@ services:
     networks:
       - stock_data                          # Attach to same network so it can communicate with the master
 
-  # consumer:
-  #   build:
-  #     context: ./consumer              # Use same Apache Spark image for PySpark streaming
-  #     dockerfile: Dockerfile
-  #   image: stream_consumer:v1
-  #   container_name: consumer          # Assign a name for the streaming job container
-  #   depends_on:
-  #     - spark-master
-  #     - kafka                  # Wait for Kafka and Spark to be online before starting job
-  #   env_file: .env
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ivy_cache:/opt/spark/work-dir/.ivy2
-  #     - ./consumer:/opt/spark/work-dir/apps
-  #   networks:
-  #     - stock_data  
+  consumer:
+    build:
+      context: ./consumer              # Use same Apache Spark image for PySpark streaming
+      dockerfile: Dockerfile
+    image: stream_consumer:v1
+    container_name: consumer          # Assign a name for the streaming job container
+    depends_on:
+      - spark-master
+      - kafka                  # Wait for Kafka and Spark to be online before starting job
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - ivy_cache:/opt/spark/work-dir/.ivy2
+      - ./consumer:/opt/spark/work-dir/apps
+    networks:
+      - stock_data  
 
-    # -------------------- KAFKA SERVICE --------------------
+   # -------------------- KAFKA SERVICE --------------------
   kafka:
     image: confluentinc/cp-kafka:7.4.10   # Use the Confluent Kafka image (version 7.4.10)
     container_name: kafka                 # Explicit container name for easier reference
@@ -127,6 +127,7 @@ services:
       POSTGRES_DB: stock_data
     ports:
       - "5434:5432"
+    
     volumes:
       - postgres_data:/var/lib/postgres/data
     networks:

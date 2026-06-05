@@ -1,5 +1,6 @@
 import requests
 from config import logger, headers, url
+from typing import List, Dict
 
 
 def connect_to_api():

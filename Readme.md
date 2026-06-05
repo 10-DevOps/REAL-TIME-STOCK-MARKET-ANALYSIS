@@ -1,6 +1,6 @@
 ## Project Name: Real Time Stock Market Analysis
 
-The project implements a real-time data pipeline that extracts stock data fom                                                           vantage API, streams it through Apache Kafka, processes it with Apache Spark, and                                                       loads it into a postgres database.                                                                                        
+The project implements a real-time data pipeline that extracts stock data fom                                    vantage API, streams it through Apache Kafka, processes it with Apache Spark, and                                loads it into a postgres database.                                                                                        
 
 All components are containerized with Docker for easy deployment.
 
